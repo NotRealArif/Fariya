@@ -20,6 +20,10 @@ const getAccountFile = function(user) {
   return path.join(path.join(__dirname, "accounts"), `${user}.json`);
 }
 
+const readAccound = function (file){
+  
+}
+
 app.get('/', async (req, res) => {
   res.render(makePath("index"), { title: websuite.title, logo: websuite.logo })
 });
@@ -29,15 +33,16 @@ app.post('/auth/login', async (req, res) => {
   const password = req.body.password || null;
   if (username && password) {
     let file = getAccountFile(username);
-    if (fs.exists(file)) {
+    if (fs.existsSync(file)) {
       file = readAccound(file);
       if (password === file.password) {
-
+        res.send("hi")
       } else {
         // error mis match password
+        res.redirect(`/?error=${websuite.error.passnotmatch}`)
       } else {
         //error not found
-      res.redirect(`/?error=${websuite.error.notfound}`)
+        res.redirect(`/?error=${websuite.error.notfound}`)
       } else {
         //error missing data
         res.redirect(`/?error=${websuite.error.missing}`)
