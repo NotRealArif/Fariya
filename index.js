@@ -3,9 +3,16 @@ import { printly, colour } from "printly.js";
 
 const app = express();
 
+app.use(express.static('./views'));
 
-app.get('/', (req, res) => {
-  res.send("FUCK ME i hate typescript..!")
+app.get('/', async (req, res) => {
+  res.status(200)
+  .sendFile('/views/index.html')
+});
+
+app.ger('/auth/fariya', async (req, res) => {
+  res.status(200)
+  .sendFile('/views/fariya.html')
 });
 
 app.listen(process.env.PORT, () => {
