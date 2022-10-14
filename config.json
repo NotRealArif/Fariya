@@ -1,9 +1,12 @@
 {
   "title":"Fariya",
   "logo":"img/logo.png",
+  "sessionsecret": "12345randomsecret",
   "error": {
     "missing": "Missing Username or Password!!!",
     "notfound": "User With This User Not Found!...",
-    "passnotmatch": "Password Not Match!.."
+    "passnotmatch": "Password Not Match!..",
+    "tokenmismatch": "Error You Token Not Match!...",
+    "notlogin": "You Are Not Login!.."
   }
 }
