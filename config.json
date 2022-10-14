@@ -9,6 +9,7 @@
     "passnotmatch": "Password Not Match!..",
     "tokenmismatch": "Error You Token Not Match!...",
     "notlogin": "You Are Not Login!..",
-    "missingchat": "Missing Message!!."
+    "missingchat": "Missing Message!!.",
+    "ainotfound": "I cant understand"
   }
 }

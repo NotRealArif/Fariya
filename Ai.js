@@ -1,13 +1,17 @@
 const websuite = require("./config.json");
+const fs = require('fs');
 
 
-function AI(req, info, currentTime){
+async function AI(req, info, currentTime){
   // req { user, token, message}
   //info { socket, userinfo}
   // response { message, ainame, date} 
   //if 
-  if(req.message === "hi" || "Hi" || "Hello" || "hello"){
-    info[req.token].socket.emit("msg", { message: `Hello ${info[req.token].info.fullname}`, ainame: websuite.ainame, date: currentTime })
+  if((fs.existsSync(path.join(path.josn(__dirname, "brain"), `${req.message}.json`)){
+    const content =  
+    info[req.token].socket.emit("msg", { message: content, ainame: websuite.ainame, date: currentTime })
+  }else{
+    info[req.token].socket.emit("msg", { message: websuite.error.ainotfound, ainame: websuite.ainame, date: currentTime })
   }
 }
 
