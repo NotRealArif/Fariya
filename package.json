@@ -1,18 +1,26 @@
 {
-  "name": "nodejs",
+  "name": "fariya",
   "version": "1.0.0",
-  "description": "",
+  "description": "ai ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "keywords": [],
-  "author": "",
+  "author": "NotRealArif",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "node-fetch": "^3.2.6",
-    "printly.js": "^1.5.0"
-  }
+    "body-parser": "^1.20.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotRealArif/Fariya.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NotRealArif/Fariya/issues"
+  },
+  "homepage": "https://github.com/NotRealArif/Fariya#readme"
 }

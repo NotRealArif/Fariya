@@ -1,0 +1,9 @@
+{
+  "title":"Fariya",
+  "logo":"img/logo.png",
+  "error": {
+    "missing": "Missing Username or Password!!!",
+    "notfound": "User With This USername Not Found!...",
+    "": ""
+  }
+}
