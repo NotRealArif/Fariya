@@ -1,20 +1,22 @@
 const websuite = require("./config.json");
 const fs = require('fs');
-
+const path = require('path'); 
+const { base64encode, base64decode } = require('nodejs-base64');
 
 async function AI(req, info, currentTime){
   // req { user, token, message}
   //info { socket, userinfo}
   // response { message, ainame, date} 
-  //if 
-  if((fs.existsSync(path.join(path.josn(__dirname, "brain"), `${req.message}.json`)){
-    const content =  
+  // encode file name https://www.base64encode.org
+  const _file = req.message;
+  const file = path.join(path.join(__dirname, "brain"), `${base64encode(_file.toLowerCase())}.json`);
+  if (fs.existsSync(file)){
+    const content = JSON.parse(fs.readFileSync(file, { encoding: 'utf-8' }))["response"];
     info[req.token].socket.emit("msg", { message: content, ainame: websuite.ainame, date: currentTime })
-  }else{
+  } else {
     info[req.token].socket.emit("msg", { message: websuite.error.ainotfound, ainame: websuite.ainame, date: currentTime })
   }
 }
-
 
 function dateFormat (date, fstr, utc) {
   utc = utc ? 'getUTC' : 'get';

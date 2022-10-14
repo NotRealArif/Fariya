@@ -130,8 +130,8 @@ io.on('connection', (socket) => {
       socket.disconnect();
     }
   });
-  socket.on('chat', (data)=>{
-    Message(data, users, current());
+  socket.on('chat', async (data)=>{
+    await Message(data, users, current());
   });
 });
 
