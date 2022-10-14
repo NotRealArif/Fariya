@@ -23,6 +23,9 @@
   		margin: auto;
   		padding: auto;
     }
+    body{
+      background-color: #1D1D1D;
+    }
   </style>
 </head>
 <body>
@@ -30,12 +33,12 @@
 	  <div class="row">
       <div class="col-lg-15">
         <center>
-          <img class="mb-4" src="/<%= logo %>" width="100" height="100" >
+          <img class="mb-4" id="logo" src="/<%= logo %>" width="100" height="100" >
         </center>
 				<div class="panel panel-default" style="height: 400px;">
 					<div style="height:10px;"></div>
-					<span style="margin-left:10px;">HI <%= user %></span><br>
-					<span style="font-size:10px; margin-left:10px;"><i>Note: Avoid using foul language and hate speech to avoid banning of account</i></span>
+					<span style="margin-left:10px; color: white;">HI <%= user %></span><br>
+					<span style="font-size:10px; color: white; margin-left:10px;"><i>Note: Avoid using foul language and hate speech to avoid banning of account</i></span>
 					<div style="height:10px;"></div>
 					<div id="chat_area" style="margin-left:10px; max-height:320px; overflow-y:scroll;">
 					</div>

@@ -120,7 +120,10 @@ io.on('connection', (socket) => {
       file = readAccound(file);
       if (data.token === file["user_token"]){
         users[data.token] = {socket: socket, info: file };
-        console.log('a user connected');
+        socket.on('disconnected', function() {
+          console.log(`${data.user} is disconnected`);
+        });
+        console.log(`${data.user} is connected`);
       }else{
       socket.emit("msg", {message: websuite.error.tokenmismatch, ainame: websuite.ainame, date: current() })
       socket.disconnect();

@@ -1,17 +1,18 @@
 const websuite = require("./config.json");
+const { checker } = require("./hookChecker.js");
 const fs = require('fs');
 const path = require('path'); 
 const { base64encode, base64decode } = require('nodejs-base64');
 
 async function AI(req, info, currentTime){
   // req { user, token, message}
-  //info { socket, userinfo}
+  //info { socket, userisnfo}
   // response { message, ainame, date} 
   // encode file name https://www.base64encode.org
   const _file = req.message;
-  const file = path.join(path.join(__dirname, "brain"), `${base64encode(_file.toLowerCase())}.json`);
+  const file = path.join(path.join(__dirname, "brain"), `${base64encode(_file.toLowerCase()).replace('/', '')}.json`);
   if (fs.existsSync(file)){
-    const content = JSON.parse(fs.readFileSync(file, { encoding: 'utf-8' }))["response"];
+    const content = checker(JSON.parse(fs.readFileSync(file, { encoding: 'utf-8' }))["response"], info[req.token].info);
     info[req.token].socket.emit("msg", { message: content, ainame: websuite.ainame, date: currentTime })
   } else {
     info[req.token].socket.emit("msg", { message: websuite.error.ainotfound, ainame: websuite.ainame, date: currentTime })
