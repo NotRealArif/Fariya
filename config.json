@@ -3,7 +3,7 @@
   "logo":"img/logo.png",
   "error": {
     "missing": "Missing Username or Password!!!",
-    "notfound": "User With This USername Not Found!...",
+    "notfound": "User With This User Not Found!...",
     "passnotmatch": "Password Not Match!.."
   }
 }

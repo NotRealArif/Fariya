@@ -20,6 +20,9 @@
   		margin: auto;
   		padding: auto;
     }
+  .error{
+    color: red;
+  }
   </style>
 </head>
 <body>
@@ -31,6 +34,7 @@
         </p>
       </center>
       <h2><center><span>Login First!</span></center></h2>
+      <h2><center><span class="error"><%= error %></span></center></h2>
       <form action="/auth/login" method="POST">
         <center>
           <p>
