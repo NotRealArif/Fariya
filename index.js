@@ -10,7 +10,7 @@ app.get('/', async (req, res) => {
   .sendFile('/views/index.html')
 });
 
-app.ger('/auth/fariya', async (req, res) => {
+app.get('/auth/fariya', async (req, res) => {
   res.status(200)
   .sendFile('/views/fariya.html')
 });
