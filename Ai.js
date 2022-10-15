@@ -11,14 +11,33 @@ async function AI(req, info, currentTime) {
   // info { socket, userisnfo}
   // response { message, ainame, date} 
   // encode file name https://www.base64encode.org
-  const _file = req.message;
-  const file = path.join(path.join(__dirname, "brain"), `${base64encode(_file.toLowerCase()).replace(/%[/?!/,.]/g, '')}.json`);
+
+  const args = req.message.split(" ");
+  const command = args.shift().toLowerCase();
+  switch (command) {
+    case "calculate": //what is anser ex.is It
+      info[req.token].socket.emit("msg", { message: `Answer it’s: ${eval(args[0])}`, ainame: websuite.ainame, date: currentTime })
+      break;
+    default:
+      standart(req, info, currentTime);
+  }
+
+}
+
+async function standart(req, info, currentTime) {
+
+  const _file = Fix(req.message, '');
+  const file = path.join(path.join(__dirname, "brain"), `${base64encode(_file.toLowerCase())}.json`);
   if (fs.existsSync(file)) {
     const content = checker(JSON.parse(fs.readFileSync(file, { encoding: 'utf-8' }))["response"], info[req.token].info);
     info[req.token].socket.emit("msg", { message: content, ainame: websuite.ainame, date: currentTime })
   } else {
     info[req.token].socket.emit("msg", { message: websuite.error.ainotfound, ainame: websuite.ainame, date: currentTime })
   }
+}
+
+function calculator(a, b) {
+  return "0";
 }
 
 function dateFormat(date, fstr, utc) {
@@ -38,10 +57,14 @@ function dateFormat(date, fstr, utc) {
   });
 }
 
-function Fix(t, value) {
+function Fix(t, value, ignore = false) {
   for (var i = 0; i < includes.length; i++) {
     var text = includes[i];
-    if (t.include(text)) {
+    if (ignore) {
+      if (ignore != text) {
+        t = t.replace(text, value);
+      }
+    } else {
       t = t.replace(text, value);
     }
   }

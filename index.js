@@ -54,7 +54,7 @@ app.get('/', async (req, res) => {
     }
   } else {
     req.session.destroy();
-    error = fixer(error, '')     error.replace(speechSynthesis.speak(utterance);, '')
+    error = fixer(error, '')
     res.render(makePath("index"), { title: websuite.title, logo: websuite.logo, error: error })
   }
 });
