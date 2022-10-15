@@ -7,7 +7,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const app = express();
 const { Server } = require("socket.io");
-const { Message, currentTime } = require("./Ai.js");
+const { Message, currentTime, fixer } = require("./Ai.js");
 const { colour } = require("printly.js");
 
 app.use(express.static('./public'));
@@ -31,13 +31,13 @@ const getAccountFile = function(user) {
 const readAccound = function(file) {
   return JSON.parse(fs.readFileSync(file, { encoding: 'utf-8' }));
 }
-const current = function (){
-  return currentTime(new Date (), "%Y-%m-%d %H:%M:%S", true);
+const current = function() {
+  return currentTime(new Date(), "%Y-%m-%d %H:%M:%S", true);
 }
 
 // index
 app.get('/', async (req, res) => {
-  const error = req.query.error || "";
+  let error = req.query.error || "";
   if (req.session.login && req.session.user && req.session.token) {
     let file = getAccountFile(req.session.user);
     if (fs.existsSync(file)) {
@@ -54,6 +54,7 @@ app.get('/', async (req, res) => {
     }
   } else {
     req.session.destroy();
+    error = fixer(error, '')     error.replace(speechSynthesis.speak(utterance);, '')
     res.render(makePath("index"), { title: websuite.title, logo: websuite.logo, error: error })
   }
 });
@@ -87,6 +88,7 @@ app.post('/auth/login', async (req, res) => {
     }
   } else {
     //error missing data
+
     res.redirect(`/?error=${websuite.error.missing}`)
   }
 });
@@ -114,26 +116,26 @@ app.get('/auth/logout', async (req, res) => {
 // socket user connect
 
 io.on('connection', (socket) => {
-  socket.on('login', (data)=>{
+  socket.on('login', (data) => {
     let file = getAccountFile(data.user);
     if (fs.existsSync(file)) {
       file = readAccound(file);
-      if (data.token === file["user_token"]){
-        users[data.token] = {socket: socket, info: file };
+      if (data.token === file["user_token"]) {
+        users[data.token] = { socket: socket, info: file };
         socket.on('disconnected', function() {
           console.log(`${data.user} is disconnected`);
         });
         console.log(`${data.user} is connected`);
-      }else{
-      socket.emit("msg", {message: websuite.error.tokenmismatch, ainame: websuite.ainame, date: current() })
-      socket.disconnect();
-    }
-    }else{
-      socket.emit("msg", {message: websuite.error.notfound, ainame: websuite.ainame, date: current() })
+      } else {
+        socket.emit("msg", { message: websuite.error.tokenmismatch, ainame: websuite.ainame, date: current() })
+        socket.disconnect();
+      }
+    } else {
+      socket.emit("msg", { message: websuite.error.notfound, ainame: websuite.ainame, date: current() })
       socket.disconnect();
     }
   });
-  socket.on('chat', async (data)=>{
+  socket.on('chat', async (data) => {
     await Message(data, users, current());
   });
 });
