@@ -2,7 +2,7 @@
   "title":"Fariya",
   "logo":"img/logo.png",
   "ainame": "Fariya", 
-  "sessionsecret": "12345randomsecret",
+  "sessionsecret": "ShittyFuckMe",
   "error": {
     "missing": "Missing Username or Password!!!",
     "notfound": "User With This User Not Found!...",
